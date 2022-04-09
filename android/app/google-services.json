@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "808945938808",
+    "project_id": "kayish-62c5a",
+    "storage_bucket": "kayish-62c5a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:808945938808:android:2656ed20021e066589988d",
+        "android_client_info": {
+          "package_name": "com.example.kayish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "808945938808-cvkhplr7t1f4glk2imqfmr06qmbear5d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kayish",
+            "certificate_hash": "44144230f8b76b2b3dc0e9d309bc29d5996438dc"
+          }
+        },
+        {
+          "client_id": "808945938808-856no36aathbrn0pe2u0jquou57o371j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPM-JM4xac4r0c5lgw4VBtstulC4pzLgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "808945938808-856no36aathbrn0pe2u0jquou57o371j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
