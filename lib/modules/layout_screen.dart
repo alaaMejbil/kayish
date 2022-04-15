@@ -18,6 +18,7 @@ import 'package:kayish/shared/component/styles.dart';
 import 'package:kayish/shared/localization/localizationSetup/app_localization.dart';
 import 'package:kayish/shared/network/local/cashe_helper.dart';
 import 'package:kayish/shared/notifications/local_notification.dart';
+import 'package:kayish/utils/utils.dart';
 import 'package:kayish/widgets/active_bottom_button.dart';
 import 'package:kayish/widgets/drawer.dart';
 
@@ -200,8 +201,10 @@ class LayoutScreen extends StatelessWidget {
                             districtId: 0,
                             realStateTypeId: 0,
                           )
-                              .then((value) {
+                              .then((value) async {
                             cubit.changeCurrentIndex(0);
+                            print(
+                                'my token is ${CasheHelper.getData(key: token)}');
                           });
                         }),
                     MaterialButton(

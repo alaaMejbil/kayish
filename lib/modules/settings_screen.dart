@@ -26,7 +26,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'notification_settings.dart';
 
 class SettingsScreen extends StatelessWidget {
-  final storage= const FlutterSecureStorage(
+  final storage = const FlutterSecureStorage(
     aOptions: AndroidOptions(
       encryptedSharedPreferences: true,
     ),
@@ -35,17 +35,13 @@ class SettingsScreen extends StatelessWidget {
     ),
   );
 
-
-
   @override
   Widget build(BuildContext context) {
-
-
     return BlocProvider(
-      create: (context)=>LogoutCubit(),
-      child: BlocConsumer<LogoutCubit,LogoutStates>(
-        listener: (context,state){
-          if(state is LogoutSuccessfulState) {
+      create: (context) => LogoutCubit(),
+      child: BlocConsumer<LogoutCubit, LogoutStates>(
+        listener: (context, state) {
+          if (state is LogoutSuccessfulState) {
             Alert(
                 context: context,
                 image: const Image(
@@ -53,9 +49,8 @@ class SettingsScreen extends StatelessWidget {
                   width: 40,
                   image: AssetImage('icons/back_pop_up.png'),
                 ),
-                title: AppLocalization.of(context).translate(
-                    'Signed out successfully'),
-
+                title: AppLocalization.of(context)
+                    .translate('Signed out successfully'),
                 style: AlertStyle(
                   buttonsDirection: ButtonsDirection.column,
                   alertBorder: RoundedRectangleBorder(
@@ -69,15 +64,12 @@ class SettingsScreen extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          color: ColorManager.primary
-
-                      ),
+                          color: ColorManager.primary),
                       child: Text(
                         AppLocalization.of(context).translate('Done')!,
                         style: Styles.getBoldMainTextStyle(
                             color: Colors.white, fontSize: FontSize.s18),
                       ),
-
                     ),
                     onPressed: () {
                       Navigator.pop(context);
@@ -85,13 +77,10 @@ class SettingsScreen extends StatelessWidget {
                     radius: BorderRadius.circular(25),
                     height: 50,
                   ),
-
-
-                ]
-            ).show();
+                ]).show();
           }
         },
-        builder: (context,state){
+        builder: (context, state) {
           return Scaffold(
             backgroundColor: ColorManager.lightGrey,
             body: Column(
@@ -106,67 +95,73 @@ class SettingsScreen extends StatelessWidget {
                         BuildListTile(
                           icon: Icons.person_outline,
                           title: 'Profile',
-                          onTap: (){
-                            if(CasheHelper.getData(key: token)!=null){
-                              navigateTo(context: context, nextScreen: ProfileScreen());
-                            }
-                            else{
+                          onTap: () {
+                            if (CasheHelper.getData(key: token) != null) {
+                              navigateTo(
+                                  context: context,
+                                  nextScreen: ProfileScreen());
+                            } else {
                               Alert(
                                   context: context,
-                                  image:const Image(
+                                  image: const Image(
                                     height: 40,
                                     width: 40,
                                     image: AssetImage('icons/back_pop_up.png'),
                                   ),
-                                  title: AppLocalization.of(context).translate('You must Register first'),
-
-                                  style:AlertStyle(
+                                  title: AppLocalization.of(context)
+                                      .translate('You must Register first'),
+                                  style: AlertStyle(
                                     buttonsDirection: ButtonsDirection.column,
                                     alertBorder: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20),
                                     ),
-                                    titleStyle:Styles.getMidMainTextStyle(color: Colors.grey.shade600,fontSize: FontSize.s16),
+                                    titleStyle: Styles.getMidMainTextStyle(
+                                        color: Colors.grey.shade600,
+                                        fontSize: FontSize.s16),
                                   ),
                                   buttons: [
                                     DialogButton(
                                       child: Container(
                                         decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(30),
-                                            color: ColorManager.primary
-
-                                        ),
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            color: ColorManager.primary),
                                         child: Text(
-                                          AppLocalization.of(context).translate('Sign Up')!,
-                                          style: Styles.getBoldMainTextStyle(color: Colors.white,fontSize: FontSize.s18),
+                                          AppLocalization.of(context)
+                                              .translate('Sign Up')!,
+                                          style: Styles.getBoldMainTextStyle(
+                                              color: Colors.white,
+                                              fontSize: FontSize.s18),
                                         ),
-
                                       ),
-                                      onPressed: (){
-                                        navigateTo(context: context, nextScreen: SignUpScreen());
+                                      onPressed: () {
+                                        navigateTo(
+                                            context: context,
+                                            nextScreen: SignUpScreen());
                                       },
                                       radius: BorderRadius.circular(25),
                                       height: 50,
                                     ),
                                     DialogButton(
                                       child: Container(
-
                                         child: Text(
-                                          AppLocalization.of(context).translate('Later')!,
-                                          style: Styles.getBoldMainTextStyle(color: ColorManager.primary,fontSize: FontSize.s18),
+                                          AppLocalization.of(context)
+                                              .translate('Later')!,
+                                          style: Styles.getBoldMainTextStyle(
+                                              color: ColorManager.primary,
+                                              fontSize: FontSize.s18),
                                         ),
-
                                       ),
-                                      onPressed: (){
+                                      onPressed: () {
                                         Navigator.pop(context);
                                       },
                                       radius: BorderRadius.circular(25),
                                       height: 50,
                                       color: Colors.white,
-                                      border: Border.all(color: ColorManager.primary),
+                                      border: Border.all(
+                                          color: ColorManager.primary),
                                     ),
-
-                                  ]
-                              ).show();
+                                  ]).show();
                             }
                           },
                         ),
@@ -180,8 +175,9 @@ class SettingsScreen extends StatelessWidget {
                         BuildListTile(
                           icon: Icons.language_outlined,
                           title: 'Language Setting',
-                          onTap: (){
-                            navigateTo(context: context, nextScreen: LangSettings());
+                          onTap: () {
+                            navigateTo(
+                                context: context, nextScreen: LangSettings());
                           },
                         ),
                         Padding(
@@ -194,8 +190,10 @@ class SettingsScreen extends StatelessWidget {
                         BuildListTile(
                           icon: Icons.notifications_none,
                           title: 'Notification Settings',
-                          onTap: (){
-                            navigateTo(context: context, nextScreen: NotificationSettingS());
+                          onTap: () {
+                            navigateTo(
+                                context: context,
+                                nextScreen: NotificationSettingS());
                           },
                         ),
                       ],
@@ -203,42 +201,36 @@ class SettingsScreen extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                if(  CasheHelper.getData(key: token)!=null)
-                  if(state is !LogoutLoadingStateState)
-                  Padding(
-                    padding: const EdgeInsets.all(40.0),
-                    child: DefaultButton(
-                      text: 'Logout',
-                      width: double.infinity,
-                      textColor: Colors.white,
-                      buttonColor: ColorManager.primary,
-                      onPressed: () {
-
-                        HomeCubit.get(context).getHomeData(cityId: 0,regionId: 0,districtId: 0,realStateTypeId: 0);
-                        LogoutCubit.get(context).logout();
-                      },
-
-                    ),
-
-
-                  ),
-                if(  CasheHelper.getData(key: token)!=null)
-                  if(state is LogoutLoadingStateState)
-                    const Padding(
-                      padding: EdgeInsets.all(40),
-                      child: CircularProgressIndicator(
-
+                if (CasheHelper.getData(key: token) != null)
+                  if (state is! LogoutLoadingStateState)
+                    Padding(
+                      padding: const EdgeInsets.all(40.0),
+                      child: DefaultButton(
+                        text: 'Logout',
+                        width: double.infinity,
+                        textColor: Colors.white,
+                        buttonColor: ColorManager.primary,
+                        onPressed: () {
+                          HomeCubit.get(context).getHomeData(
+                              cityId: 0,
+                              regionId: 0,
+                              districtId: 0,
+                              realStateTypeId: 0);
+                          LogoutCubit.get(context).logout();
+                        },
                       ),
                     ),
-
+                if (CasheHelper.getData(key: token) != null)
+                  if (state is LogoutLoadingStateState)
+                    const Padding(
+                      padding: EdgeInsets.all(40),
+                      child: CircularProgressIndicator(),
+                    ),
               ],
             ),
           );
         },
-
       ),
     );
   }
 }
-
-

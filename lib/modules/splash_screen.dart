@@ -40,8 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    print(nextAuctionLeftTime2(
-        adTime: 1648229562452 - 2400000, context: context));
+
     return Scaffold(
       backgroundColor: Colors.grey,
       body: Container(

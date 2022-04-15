@@ -45,11 +45,14 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             onTap: () {
               if (CasheHelper.getData(key: token) != null) {
-                if(HomeCubit.get(context).homeModel!.data!.userStatus==1) {
-                  navigateTo(context: context, nextScreen: AccountVerification());
-                }
-                else{
-                  navigateAndFinish(context: context, nextScreen: AccountVerificationRequest());
+                if (HomeCubit.get(context).homeModel!.data!.userStatus == 1 ||
+                    HomeCubit.get(context).homeModel!.data!.userStatus == '1') {
+                  navigateTo(
+                      context: context, nextScreen: AccountVerification());
+                } else {
+                  navigateAndFinish(
+                      context: context,
+                      nextScreen: AccountVerificationRequest());
                 }
               } else {
                 Alert(
@@ -194,7 +197,6 @@ class MyDrawer extends StatelessWidget {
                       ),
                     ]).show();
               }
-
             },
           ),
           ListTile(
@@ -230,22 +232,22 @@ class MyDrawer extends StatelessWidget {
                   width: 20,
                 ),
               )),
-          if(CasheHelper.getData(key: token)==null)
-          ListTile(
-            horizontalTitleGap: 0,
-            title: Text(
-              localizaton.translate('Sign Up')!,
-              style: Styles.getMidMainTextStyle(
-                  color: Colors.black, fontSize: FontSize.s16),
+          if (CasheHelper.getData(key: token) == null)
+            ListTile(
+              horizontalTitleGap: 0,
+              title: Text(
+                localizaton.translate('Sign Up')!,
+                style: Styles.getMidMainTextStyle(
+                    color: Colors.black, fontSize: FontSize.s16),
+              ),
+              leading: const Icon(
+                Icons.app_registration,
+                size: 20,
+              ),
+              onTap: () {
+                navigateTo(context: context, nextScreen: SignUpScreen());
+              },
             ),
-            leading: const Icon(
-              Icons.app_registration,
-              size: 20,
-            ),
-            onTap: () {
-              navigateTo(context: context, nextScreen: SignUpScreen());
-            },
-          ),
         ],
       ),
     );

@@ -18,7 +18,7 @@ class Data {
   //if user status 1 = not send data to verification
   // if user status 2 = send date to verification and waiting
   // if user register 3 = accept verification from user
-  int? userStatus;
+  dynamic userStatus;
 
   Data.fromMap(Map<String, dynamic> json) {
     currentAuctions = List<AuctionDetails>.from(
@@ -45,7 +45,8 @@ class AuctionDetails {
   int? endTime;
   bool? followed;
   String? realestateImage;
-  int? maximum;
+  dynamic maximum;
+  String? calTime;
 
   AuctionDetails.fromMap(Map<String, dynamic> json) {
     id = json["id"];
@@ -62,5 +63,6 @@ class AuctionDetails {
     followed = json['followed'];
     realestateImage = json["realestate_image"];
     maximum = json['maximum_price'];
+    calTime = json['cal_time'];
   }
 }

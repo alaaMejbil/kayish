@@ -112,7 +112,7 @@ class _UnitItemState extends State<UnitItem> {
               if (widget.enableStatus!)
                 Container(
                   height: 34,
-                  width: widget.width! * .30,
+                  //width: widget.width! * .5,
                   decoration: BoxDecoration(
                     color: widget.statusColor!,
                     borderRadius: BorderRadius.circular(20),
@@ -122,7 +122,8 @@ class _UnitItemState extends State<UnitItem> {
                     children: [
                       Center(
                         child: Padding(
-                          padding: EdgeInsets.all(4),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                           child: Text(
                             widget.status!,
                             textScaleFactor: .85,

@@ -49,9 +49,10 @@ class VerificationCodeCubit extends Cubit<VerificationCodeStates> {
       'lang': CasheHelper.getData(key: 'isArabic') == false ? "en" : "ar"
     }, data: {
       'phone': phoneNumber,
-    }).then((value) {
+    }).then((value) async {
       verificationCodeModel = VerificationCodeModel.fromMap(value.data);
-
+      print(
+          '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
       CasheHelper.putData(
           key: token, value: verificationCodeModel!.data!.userInfo!.token);
       print(verificationCodeModel!.data!.userInfo!.token);

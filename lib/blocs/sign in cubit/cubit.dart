@@ -42,10 +42,11 @@ class SignInCubit extends Cubit<LoginStates> {
         if (loginModel!.status == 1) {
           CasheHelper.putData(key: 'phoneNumber', value: phoneNumber);
           FirebaseAuth.instance.verifyPhoneNumber(
-            phoneNumber: '+966$phoneNumber}',
+            phoneNumber: '+966$phoneNumber',
             timeout: const Duration(seconds: 30),
             verificationCompleted: (PhoneAuthCredential credential) {},
             verificationFailed: (FirebaseAuthException e) {
+              print(e.toString());
               emit(CodeNotSentState());
             },
             codeSent: (String verificationId, int? resendToken) async {
@@ -75,7 +76,7 @@ class SignInCubit extends Cubit<LoginStates> {
   void sendCodeVerification({required String mobileNumber}) {
     emit(LoginLoadingState());
     FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: '+966$mobileNumber}',
+        phoneNumber: '+966$mobileNumber',
         timeout: const Duration(seconds: 30),
         verificationCompleted: (PhoneAuthCredential credential) {},
         verificationFailed: (FirebaseAuthException e) {

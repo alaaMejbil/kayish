@@ -1036,17 +1036,17 @@ class HomeScreen extends StatelessWidget {
                                             ]).show();
                                       } else {
                                         navigateTo(
-                                            context: context,
-                                            nextScreen: DealsDetailsScreen(
-                                                auctionId: cubit
-                                                    .homeModel!
-                                                    .data!
-                                                    .nextAuctions[index]
-                                                    .id!));
+                                          context: context,
+                                          nextScreen: DealsDetailsScreen(
+                                              auctionId: cubit.homeModel!.data!
+                                                  .nextAuctions[index].id!),
+                                        );
                                       }
                                     },
                                     child: UnitItem(
                                       onFollowTab: () {
+                                        print(
+                                            '!CasheHelper.getData(key: isVerified) ====>${!CasheHelper.getData(key: isVerified)}');
                                         if (!CasheHelper.getData(
                                             key: isVerified)) {
                                           MyAlert.myAlert(
@@ -1192,10 +1192,15 @@ class HomeScreen extends StatelessWidget {
                                       location:
                                           '${cubit.homeModel!.data!.nextAuctions[index].realestateCity} - ${cubit.homeModel!.data!.nextAuctions[index].realestateReigon}',
                                       price: '2532422',
-                                      status: nextAuctionLeftTime(
-                                          context: context,
-                                          adTime: cubit.homeModel!.data!
-                                              .nextAuctions[index].startTime!),
+                                      // status: nextAuctionLeftTime(
+                                      //     context: context,
+                                      //     adTime: cubit.homeModel!.data!
+                                      //         .nextAuctions[index].startTime!),
+                                      // status: AppLocalization.of(context)
+                                      //     .translate('start soon')!,
+                                      status: cubit.homeModel!.data!
+                                          .nextAuctions[index].calTime
+                                          .toString(),
                                       unitType: cubit.homeModel!.data!
                                           .nextAuctions[index].realestateType,
                                     ),
@@ -1339,6 +1344,8 @@ class HomeScreen extends StatelessWidget {
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (context, index) => InkWell(
                                     onTap: () {
+                                      print(CasheHelper.getData(
+                                          key: isNotRegister));
                                       if (CasheHelper.getData(
                                               key: isNotRegister) ==
                                           true) {

@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:kayish/shared/component/date_functions.dart';
 import 'package:kayish/shared/network/local/cashe_helper.dart';
 import 'package:kayish/shared/network/local/secure_helper.dart';
@@ -18,6 +19,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'blocs/bloc observer/bloc_observer.dart';
 import 'modules/app.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 void listenNotifications() =>
     NotificationApi.onNotifications.stream.listen(onClickedNotification);
@@ -34,6 +36,12 @@ void main() async {
   //listenNotifications();
   Bloc.observer = MyBlocObserver();
   DioHelper.init('https://icrcompany.net/keyesh/public/api/');
+  //DioHelper.init('https://keyesh.com.shatarh.net/api/');
+  print('my token is ${CasheHelper.getData(key: token)}');
+
+  var x = DateTime.fromMillisecondsSinceEpoch(1649922300000, isUtc: true);
+  print(timeago.format(x));
+
   await SecureHelper.getInstance();
   FirebaseMessaging.onMessage.listen((event) {
     print('******************* onMessage Notification **********************');

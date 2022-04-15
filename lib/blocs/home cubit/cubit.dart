@@ -54,20 +54,36 @@ class HomeCubit extends Cubit<HomeStates> {
         if (homeModel!.modelState == 1) {
           followedList = {};
           print('=====> user status  ${homeModel!.data!.userStatus!}');
+          print('=====> homeModel  ${value.data}');
           for (var element in homeModel!.data!.currentAuctions) {
             followedList.addAll({element.id!: element.followed!});
           }
           for (var element in homeModel!.data!.nextAuctions) {
             followedList.addAll({element.id!: element.followed!});
           }
-          CasheHelper.putData(
-              key: isNotRegister, value: (homeModel!.data!.userStatus == 0));
-          CasheHelper.putData(
-              key: isLogin, value: (homeModel!.data!.userStatus == 1));
-          CasheHelper.putData(
-              key: isNotVerified, value: (homeModel!.data!.userStatus == 2));
-          CasheHelper.putData(
-              key: isVerified, value: (homeModel!.data!.userStatus == 3));
+
+          if (homeModel!.data!.userStatus.runtimeType == int) {
+            CasheHelper.putData(
+                key: isNotRegister, value: (homeModel!.data!.userStatus == 0));
+            CasheHelper.putData(
+                key: isLogin, value: (homeModel!.data!.userStatus == 1));
+            CasheHelper.putData(
+                key: isNotVerified, value: (homeModel!.data!.userStatus == 2));
+            CasheHelper.putData(
+                key: isVerified, value: (homeModel!.data!.userStatus == 3));
+          } else if (homeModel!.data!.userStatus.runtimeType == String) {
+            CasheHelper.putData(
+                key: isNotRegister,
+                value: (homeModel!.data!.userStatus == '0'));
+            CasheHelper.putData(
+                key: isLogin, value: (homeModel!.data!.userStatus == '1'));
+            CasheHelper.putData(
+                key: isNotVerified,
+                value: (homeModel!.data!.userStatus == '2'));
+            CasheHelper.putData(
+                key: isVerified, value: (homeModel!.data!.userStatus == '3'));
+          }
+
           emit(HomeSuccessfulState());
         } else {
           changeLoadingState(false);

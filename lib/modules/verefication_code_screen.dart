@@ -161,6 +161,7 @@ class MobileVerification extends StatelessWidget {
                               verificationId:
                                   CasheHelper.getData(key: 'verificationToken'),
                             );
+                            // save this account in DB
                             cubit2.signUp(
                                 phoneNumber:
                                     CasheHelper.getData(key: 'phoneNumber'),

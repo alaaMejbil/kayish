@@ -99,7 +99,7 @@ String nextAuctionLeftTime(
 
 String nextAuctionLeftTime2(
     {required int adTime, required BuildContext context}) {
-  int min = DateTime.fromMillisecondsSinceEpoch(1648228454554 - 1000000)
+  int min = DateTime.fromMillisecondsSinceEpoch(adTime * 1000)
       .difference(DateTime.now())
       .inMinutes;
 
@@ -174,4 +174,17 @@ String notificationTime(int timeInEpoch) {
   String time1 = DateFormat.jm()
       .format(DateTime.fromMillisecondsSinceEpoch(timeInEpoch * 1000));
   return time1;
+}
+
+String calculateTimeDifferenceBetween(
+    {required DateTime startDate, required DateTime endDate}) {
+  int seconds = endDate.difference(startDate).inSeconds;
+  if (seconds < 60)
+    return '$seconds second';
+  else if (seconds >= 60 && seconds < 3600)
+    return '${startDate.difference(endDate).inMinutes.abs()} minute';
+  else if (seconds >= 3600 && seconds < 86400)
+    return '${startDate.difference(endDate).inHours} hour';
+  else
+    return '${startDate.difference(endDate).inDays} day';
 }

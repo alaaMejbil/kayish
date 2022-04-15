@@ -22,6 +22,7 @@ class DealsDetailsCubit extends Cubit<DealsDetailsStates> {
   int activePage = 0;
   AllBidsModel? allBidsModel;
   List<AllBidsModel> all = [];
+  List<DealsTenders> allBids = [];
   ScrollController scrollController = ScrollController();
 
   TextEditingController bidValueController = TextEditingController();
@@ -40,16 +41,16 @@ class DealsDetailsCubit extends Cubit<DealsDetailsStates> {
     }
   }
 
+  Future<void> increaseHighestPrice() async {
+    highestPrice = highestPrice! + bidCounter!;
+    emit(DealsIncreaseHighestPrice());
+  }
+
   //initial value of bid value and highest price
   void initialBidValue() {
     bidCounter = tenderValue;
     bidValueController.text = '$bidCounter';
     highestPrice = openingPrice;
-  }
-
-  Future<void> increaseHighestPrice() async {
-    highestPrice = highestPrice! + bidCounter!;
-    emit(DealsIncreaseHighestPrice());
   }
 
   DealsDetailsModel? dealsDetailsModel;
@@ -60,16 +61,15 @@ class DealsDetailsCubit extends Cubit<DealsDetailsStates> {
     }).then((value) {
       if (value.statusCode == 200) {
         dealsDetailsModel = DealsDetailsModel.fromMap(value.data);
-
         if (dealsDetailsModel!.modelState == 1) {
-          print(dealsDetailsModel!.data!.auctionDetails!.status);
           tenderValue = dealsDetailsModel!.data!.auctionDetails!.tendersValue!;
-
           openingPrice = dealsDetailsModel!.data!.auctionDetails!.defaultPrice!;
           highestPrice = dealsDetailsModel!.data!.auctionDetails!.maximumPrice!;
-          initialBidValue();
-          getAllAuctionBids(auctionId);
+          allBids = dealsDetailsModel!.data!.auctionDetails!.dealsTenders;
 
+          initialBidValue();
+
+          //getAllAuctionBids(auctionId);
           emit(DealsDetailsSuccessfulState());
         } else {
           emit(DealsDetailsErrorDataInputState());
@@ -128,7 +128,7 @@ class DealsDetailsCubit extends Cubit<DealsDetailsStates> {
     emit(ChangePageIndicator());
   }
 
-  void sendBidToApi(int bidValue, int id) {
+  Future<void> sendBidToApi(int bidValue, int id) async {
     emit(SendBidToApiLoadingState());
     DioHelper.postData(url: 'newTender', headers: {
       'lang': CasheHelper.getData(key: 'isArabic') == false ? 'en' : 'ar',

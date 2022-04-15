@@ -609,35 +609,20 @@ class DealsDetailsScreen extends StatelessWidget {
                               shrinkWrap: true,
                               reverse: true,
                               physics: NeverScrollableScrollPhysics(),
-                              itemCount: cubit.dealsDetailsModel!.data!
-                                          .auctionDetails!.dealsTenders.length >
-                                      3
-                                  ? 3
-                                  : cubit.dealsDetailsModel!.data!
-                                      .auctionDetails!.dealsTenders.length,
+                              itemCount: cubit.allBids.length,
+                              // itemCount: cubit.dealsDetailsModel!.data!
+                              //             .auctionDetails!.dealsTenders.length >
+                              //         3
+                              //     ? 3
+                              //     : cubit.dealsDetailsModel!.data!
+                              //         .auctionDetails!.dealsTenders.length,
                               itemBuilder: (context, index) => Column(
                                 children: [
                                   DealsBidsItem(
-                                    name: cubit
-                                        .dealsDetailsModel!
-                                        .data!
-                                        .auctionDetails!
-                                        .dealsTenders[index]
-                                        .name
-                                        .toString(),
-                                    time: cubit
-                                        .dealsDetailsModel!
-                                        .data!
-                                        .auctionDetails!
-                                        .dealsTenders[index]
-                                        .createdAt!
+                                    name: cubit.allBids[index].name.toString(),
+                                    time: cubit.allBids[index].createdAt!
                                         .substring(11, 19),
-                                    date: cubit
-                                        .dealsDetailsModel!
-                                        .data!
-                                        .auctionDetails!
-                                        .dealsTenders[index]
-                                        .createdAt!
+                                    date: cubit.allBids[index].createdAt!
                                         .substring(0, 10),
                                     // time:
                                     //     '${DateTime.parse(cubit.all.first.time!).hour} : ${DateTime.parse(cubit.all.first.time!).minute} : ${DateTime.parse(cubit.all.first.time!).second}',
@@ -1251,21 +1236,21 @@ class DealsDetailsScreen extends StatelessWidget {
                                                   cubit
                                                       .increaseHighestPrice()
                                                       .then((value) {
-                                                    DealsDetailsCubit.get(
-                                                            context)
-                                                        .sendBid(
-                                                            value: cubit
-                                                                .highestPrice!
-                                                                .toString(),
-                                                            userId: ProfileCubit
-                                                                    .get(
-                                                                        context)
-                                                                .profileModel!
-                                                                .data!
-                                                                .profile!
-                                                                .id!,
-                                                            auctionId:
-                                                                auctionId);
+                                                    // DealsDetailsCubit.get(
+                                                    //         context)
+                                                    //     .sendBid(
+                                                    //         value: cubit
+                                                    //             .highestPrice!
+                                                    //             .toString(),
+                                                    //         userId: ProfileCubit
+                                                    //                 .get(
+                                                    //                     context)
+                                                    //             .profileModel!
+                                                    //             .data!
+                                                    //             .profile!
+                                                    //             .id!,
+                                                    //         auctionId:
+                                                    //             auctionId);
                                                     cubit.sendBidToApi(
                                                         cubit.highestPrice!,
                                                         cubit
@@ -1273,6 +1258,10 @@ class DealsDetailsScreen extends StatelessWidget {
                                                             .data!
                                                             .auctionDetails!
                                                             .id!);
+                                                  }).then((value) {
+                                                    print(cubit.highestPrice!);
+                                                    cubit.getAuctionDetails(
+                                                        auctionId: auctionId);
                                                   });
                                                 }
                                               },
